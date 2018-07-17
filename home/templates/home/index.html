@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HOME</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <div class="top">
+        <h1><a>HANIUM CCTV</a></h1>
+        <span>{{message}}</span>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td><B>번호</B></td>
+                <td><B>제목</B></td>
+                <td><B>내용</B></td>
+                <td><B>날짜</B></td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{post.id}}</td>
+                <td>{{post.title}}</td>
+                <td>{{post.content}}</td>
+                <td>{{post.updated_at}}</td>
+            </tr>
+            {% endfor %}
+            <tbody>
+        </table>
+    </div>
+</body>
+</html>
