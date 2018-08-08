@@ -1,6 +1,11 @@
+* {
+  text-decoration: none;
+}
+
 .top {
   margin: 30px;
   text-align: center;
+
 }
 
 .top h1 a {

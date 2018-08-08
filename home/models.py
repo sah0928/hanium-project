@@ -11,3 +11,17 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Test(models.Model):
+    idtime = models.DateTimeField(auto_now_add=True) # 해당 레코드 생성시 현재 시간 자동저장
+    object = models.CharField(max_length=100) # 길이 제한이 있는 문자열
+    position_x = models.CharField(max_length=100) # 길이 제한이 있는 문자열
+    position_y = models.CharField(max_length=100) # 길이 제한이 있는 문자열
+    width = models.CharField(max_length=100) # 길이 제한이 있는 문자열
+    height = models.CharField(max_length=100) # 길이 제한이 있는 문자열
+    color_upper = models.CharField(max_length=100) # 길이 제한이 있는 문자열
+    color_lower = models.CharField(max_length=100) # 길이 제한이 있는 문자열
+
+    def __str__(self):
+        return self.idtime
