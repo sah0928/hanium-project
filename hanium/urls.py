@@ -16,9 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url
 from home import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index),
     url(r'^search/', views.search),
+    url(r'^video/', views.video),
 ]
+
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

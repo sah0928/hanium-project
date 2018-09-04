@@ -1,9 +1,9 @@
 from django import forms
 
-from .models import Post
+from .models import Person
 
 
-class PostForm(forms.ModelForm):
+class PersonForm(forms.ModelForm):
     class Meta:
-        model = Post
-        fields = ('title', )
+        model = Person
+        fields = ('id', )

@@ -1,38 +1,43 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import Post
-from .forms import PostForm
+from .models import Person
+from .forms import PersonForm
+
 
 # Create your views here.
 def index(request):
     msg = 'Welcome!'
-    all_posts = Post.objects.all()
-    form = PostForm()
+    all_people = Person.objects.all()
+    form = PersonForm()
 
-    ### post 추가 코드 ###
-    # new_post = Post(title="add title", content="추가")
-    # new_post.save()
+    # ### person 추가 코드 ###
+    # new_person = Person(id="201809011530301", label="person1", position_x="10", position_y="10", width="", height="", color_upper="", color_lower="")
+    # new_person.save()
 
-    return render(request, 'home/index.html', {'message': msg, 'posts': all_posts, 'form': form})
+    return render(request, 'home/index.html', {'message': msg, 'people': all_people, 'form': form})
     # context안에 있는 Post 정보를 index.html로 전달
 
 
 def search(request):
-    all_posts = Post.objects.all()
-    q = request.GET.get('q', '')
-    if q:
-        all_posts = all_posts.filter(title__icontains=q)
-    return render(request, 'home/search.html', {'posts': all_posts, 'keyword': q})
+    colorUpper = request.GET.get('colorUpper', '')
+    colorLower = request.GET.get('colorLower', '')
 
-    # if request.method == "POST":
-    #     form = PostForm(request.POST)
-    #     if form.is_valid():
-    #         msg = "success"
-    #         keyword = request.POST['title']
-    #         all_posts = all_posts.get(title__icontains=keyword)
-    #         return render(request, 'home/search.html', {'message': msg, 'keyword': keyword})
-    # else:
-    #     msg = "fail"
-    #
-    # return render(request, 'home/search.html', {'message': msg})
+    all_people = Person.objects.all()
+
+    if colorUpper:
+        all_people = all_people.filter(colorUpper__icontains=colorUpper)
+    else:
+        colorUpper = 'not select'
+
+    if colorLower:
+        all_people = all_people.filter(colorLower__icontains=colorLower)
+    else:
+        colorLower = 'not select'
+
+    return render(request, 'home/search.html', {'people': all_people, 'colorUpper': colorUpper, 'colorLower': colorLower})
+
+
+def video(request):
+    return render(request, 'home/video.html')
+

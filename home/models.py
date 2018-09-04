@@ -1,27 +1,34 @@
 from django.db import models
 
-# Create your models here.
+
 class Post(models.Model):
-    title = models.CharField(max_length=100) # 길이 제한이 있는 문자열
-    content = models.TextField(null=True)             # 길이 제한이 없는 문자열
-    created_at = models.DateTimeField(auto_now_add=True) # 해당 레코드 생성시 현재 시간 자동저장
-    updated_at = models.DateTimeField(auto_now=True) # 해당 레코드 갱신시 현재 시간 자동저장
-    # DB에서는 길이제한 유무에 따라서 문자열 필드타입이 다른다.
-    # 길이 제한이 없는 문자열을 많이 쓰면 성능이 좋지 않다.
+    title = models.CharField(max_length=100)
+    content = models.TextField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)  # 해당 레코드 생성시 현재 시간 자동저장
+    updated_at = models.DateTimeField(auto_now=True)  # 해당 레코드 갱신시 현재 시간 자동저장
 
     def __str__(self):
         return self.title
 
 
-class Test(models.Model):
-    idtime = models.DateTimeField(auto_now_add=True) # 해당 레코드 생성시 현재 시간 자동저장
-    object = models.CharField(max_length=100) # 길이 제한이 있는 문자열
-    position_x = models.CharField(max_length=100) # 길이 제한이 있는 문자열
-    position_y = models.CharField(max_length=100) # 길이 제한이 있는 문자열
-    width = models.CharField(max_length=100) # 길이 제한이 있는 문자열
-    height = models.CharField(max_length=100) # 길이 제한이 있는 문자열
-    color_upper = models.CharField(max_length=100) # 길이 제한이 있는 문자열
-    color_lower = models.CharField(max_length=100) # 길이 제한이 있는 문자열
+class Person(models.Model):
+    id = models.CharField(max_length=100, primary_key=True)  # 이미지시간 + idx (201808301, 201808302 ...)
+    label = models.CharField(max_length=100)  # 사람의 임시 id (person1, person2 ...)
+    positionX = models.CharField(max_length=100)
+    positionY = models.CharField(max_length=100)
+    width = models.CharField(max_length=100)
+    height = models.CharField(max_length=100)
+    colorUpper = models.CharField(max_length=100)
+    colorLower = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.idtime
+        return self.id
+
+
+class Photo(models.Model):
+    time = models.DateTimeField(auto_now_add=True, primary_key=True)  # 해당 레코드 생성시 현재 시간 자동저장
+    image = models.ImageField(upload_to="img")
+
+    def __str__(self):
+        return self.time
+

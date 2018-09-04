@@ -1,0 +1,16 @@
+body {text-align: center;}
+ul {list-style:none;}
+#drag { border: 10px solid black; text-align: center; padding:20px; width: 500px; margin: auto; display: inline-block;}
+#einput {width:400px;}
+#output {margin:20px;}
+
+#filesinput {
+    visibility: collapse;
+    width: 0px;
+}
+#output img{
+    border: 5px solid #333;
+    margin-right: 2px;
+}
+#small label {font-size:14px;}
+#small div {margin:5px 0;}
