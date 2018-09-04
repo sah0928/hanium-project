@@ -40,6 +40,7 @@
             $("#colorLower").val("{{colorLower}}").attr("selected", true);
         });
 
+
     </script>
 </head>
 <body onload="draw();">
@@ -70,37 +71,38 @@
 <div class="container">
     <table id="myTable" class="table table-striped">
         <thead>
-            <tr>
-                <td><B>video</B></td>
-                <td><B>id</B></td>
-                <td><B>label</B></td>
-                <td><B>positionX</B></td>
-                <td><B>positionY</B></td>
-                <td><B>width</B></td>
-                <td><B>height</B></td>
-                <td><B>상의색</B></td>
-                <td><B>하의색</B></td>
-                <td><B>image</B></td>
-            </tr>
+        <tr>
+            <td><B>video</B></td>
+            <td><B>id</B></td>
+            <td><B>label</B></td>
+            <td><B>positionX</B></td>
+            <td><B>positionY</B></td>
+            <td><B>width</B></td>
+            <td><B>height</B></td>
+            <td><B>상의색</B></td>
+            <td><B>하의색</B></td>
+            <td><B>image</B></td>
+        </tr>
         </thead>
         <tbody>
-            {% for person in people %}
-            <tr>
-                <td><input type="button" value="click"></td>
-                <td>{{person.id}}</td>
-                <td>{{person.label}}</td>
-                <td>{{person.positionX}}</td>
-                <td>{{person.positionY}}</td>
-                <td>{{person.width}}</td>
-                <td>{{person.height}}</td>
-                <td>{{person.colorUpper}}</td>
-                <td>{{person.colorLower}}</td>
-                <td>
-                    <img style="display:none" id="source" src="https://s3.us-east-2.amazonaws.com/webviedo/media/20180903123302.jpg" width="150"
-                         height="150">
-                </td>
-            </tr>
-            {% endfor %}
+        {% for person in people %}
+        <tr>
+            <td><input type="button" value="click"></td>
+            <td>{{person.id}}</td>
+            <td>{{person.label}}</td>
+            <td>{{person.positionX}}</td>
+            <td>{{person.positionY}}</td>
+            <td>{{person.width}}</td>
+            <td>{{person.height}}</td>
+            <td>{{person.colorUpper}}</td>
+            <td>{{person.colorLower}}</td>
+            <td>
+                <img style="display:none" id="source"
+                     src="https://s3.us-east-2.amazonaws.com/webviedo/media/{{person.id|slice:':14'}}.jpg" width="150"
+                     height="150">
+            </td>
+        </tr>
+        {% endfor %}
         </tbody>
     </table>
     <div id="alertText"></div>
