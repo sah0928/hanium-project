@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^search/', views.search),
     url(r'^video/', views.video),
+    url(r'^cctv/', views.cctv),
 ]
 
 if settings.DEBUG:

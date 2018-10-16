@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8">
+    <title>CCTV</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+  <div class="top">
+      <h1><a href="/">HANIUM CCTV</a></h1>
+  </div>
+
+  <div class="w3-container">
+    <b><< 선택하신 CCTV 영상입니다 >></b> <br><br>
+    ID : {{id}} <br>
+    Label : {{label}} <br>
+  </div>
+
+  <div class="w3-content" style="padding: 10px;">
+    {% for person in list %}
+    <div>
+      <img class="mySlides" src="https://s3.us-east-2.amazonaws.com/webviedo/media/{{person|slice:':14'}}.jpg" style="max-width:800px; height:200px; margin: 0 auto; display: none;"/>
+    </div>
+    {% endfor %}
+
+    <br>
+    <div id="number"></div>
+    <br>
+    <div id="alert"></div>
+  </div>
+
+  <br>
+  <button id="playpause" onclick="buttonClick();">Pause</button>
+  <button id="back" onclick="window.location.href='javascript:history.back()'">목록으로</button>
+
+  <script type="text/javascript">
+    var stop = 0; // 0일 때 재생, 1일 때 정지
+    var slideIndex = 0;
+    startFun();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > x.length) {slideIndex = 1}
+        x[slideIndex-1].style.display = "block";
+
+        image_url = x[slideIndex-1].getAttribute('src');
+        tmp = image_url.split('/');
+        image_name = tmp[tmp.length -1].split('.')[0];
+
+        datetime = image_name.substring(0, 4) + "년" + image_name.substring(4, 6) + "월" + image_name.substring(6, 8) + "일" + image_name.substring(8, 10) + "시" + image_name.substring(10, 12) + "분" + image_name.substring(12, 14) + "초";
+        document.getElementById("alert").innerHTML = datetime;
+        document.getElementById("number").innerHTML = slideIndex + "/" + x.length;
+    }
+
+    // setInerval 메소드로 slideFun() 함수를 1초 마다 실행 합니다.
+    function startFun() {
+      slideTime = setInterval("carousel()", 1000);
+      stop = 0;
+      document.getElementById("playpause").innerHTML = "Pause";
+    }
+
+    // 이미지에 마우스 오버시 실행중인 setInerval 를 clearInterval 로 정지 합니다.
+    function stopFun() {
+      clearInterval(slideTime);
+      stop = 1;
+      document.getElementById("playpause").innerHTML = "Play";
+    }
+
+    function buttonClick() {
+      if (stop == 0) {
+        stopFun();
+      } else {
+        startFun();
+      }
+    }
+
+  </script>
+</body>
+</html>

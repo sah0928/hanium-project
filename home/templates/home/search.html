@@ -41,6 +41,7 @@
         });
 
 
+
     </script>
 </head>
 <body onload="draw();">
@@ -87,7 +88,9 @@
         <tbody>
         {% for person in people %}
         <tr>
-            <td><input type="button" value="click"></td>
+            <td><input type="button" value="click"
+                       onclick="window.location.href='http://localhost:8000/cctv?id={{person.id}}&label={{person.label}}'">
+            </td>
             <td>{{person.id}}</td>
             <td>{{person.label}}</td>
             <td>{{person.positionX}}</td>
